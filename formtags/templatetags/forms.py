@@ -146,6 +146,7 @@ Example:
 
 """
 
+import six
 from collections import deque
 from django import template
 
@@ -690,7 +691,7 @@ class HiddenFieldsNode(template.Node):
             raise FormTagError("Hidden field tag must be nested in a form tag!")
 
         if context[STATEVAR]['render']:
-            return u'\n'.join([unicode(f) for f in context[FORMVAR].hidden_fields()])
+            return u'\n'.join([six.text_type(f) for f in context[FORMVAR].hidden_fields()])
         else:
             return u''
 
